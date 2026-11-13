@@ -1,0 +1,1762 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10283e">
+  <meta name="description"
+    content="SICT235 Session 04 · Dart Arrays and Lists, Sets, Maps, collection features, cascades and functions · interactive guided practical Codelab">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <title>Codelab 04 · Dart Collections and Functions | SICT235</title>
+  <link rel="stylesheet" href="css/style.css?v=session04-v1">
+  <link rel="stylesheet" href="css/session04-additions.css?v=session04-v1">
+  <script defer src="js/gists.js"></script>
+  <script defer src="js/app.js?v=session04-v1"></script>
+  <script defer src="js/session04-interactive.js?v=session04-v1"></script>
+</head>
+
+<body><a class="skip-link" href="#content">Skip to lesson</a>
+  <div class="app-shell">
+    <div class="mobile-scrim" hidden id="scrim"></div>
+    <aside class="sidebar" id="sidebar" aria-label="Codelab navigation">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true"><svg height="27" width="27" viewBox="0 0 32 32">
+            <path d="M17 3H28L9 22H1L17 3ZM13 24l8-8h-8l-4 4 4 4Zm3 3h11l-6-6-5 6Z" fill="currentColor" />
+          </svg></div>
+        <div><span class="brand-label">TVET CODELAB STUDIO</span><strong>Mobile Apps · PDB2</strong></div><button
+          type="button" id="sidebarClose" class="icon-button sidebar-close" aria-label="Close navigation">✕</button>
+      </div>
+      <div class="sidebar-course"><span class="course-code">SICT235 · 2026–2027</span>
+        <h2>Dart Collections<br>&amp; Functions</h2>
+        <p>04 / Arrays · Collections · Cascades · Functions</p>
+        <div class="progress-summary"><span>Your progress</span><strong id="progressLabel">0 of 12</strong></div>
+        <div id="progressbar" class="progress-track" role="progressbar" aria-label="Session completion"
+          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="progressFill"></div>
+        </div>
+      </div>
+      <nav aria-label="Learning sections">
+        <ol class="step-nav" id="stepList">
+          <li><button type="button" class="step-link" data-step="0"><span class="step-number">01</span><span
+                class="step-nav-text">Prior knowledge · recall<small>8 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="1"><span class="step-number">02</span><span
+                class="step-nav-text">Arrays → Dart Lists<small>11 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="2"><span class="step-number">03</span><span
+                class="step-nav-text">Creating & modifying Lists<small>14 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="3"><span class="step-number">04</span><span
+                class="step-nav-text">Iteration & List methods<small>12 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="4"><span class="step-number">05</span><span
+                class="step-nav-text">Sets & unique items<small>9 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="5"><span class="step-number">06</span><span
+                class="step-nav-text">Maps & key-value data<small>10 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="6"><span class="step-number">07</span><span
+                class="step-nav-text">Collection if / for / spread<small>10 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="7"><span class="step-number">08</span><span
+                class="step-nav-text">Cascades from Cookbook<small>10 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="8"><span class="step-number">09</span><span
+                class="step-nav-text">Functions, return & scope<small>11 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="9"><span class="step-number">10</span><span
+                class="step-nav-text">Parameters & defaults<small>11 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="10"><span class="step-number">11</span><span
+                class="step-nav-text">Callbacks & closures<small>10 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+          <li><button type="button" class="step-link" data-step="11"><span class="step-number">12</span><span
+                class="step-nav-text">Practice & homework<small>4 min</small></span><span class="step-check"
+                aria-hidden="true">✓</span></button></li>
+        </ol>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span>Progress saved on this device<button type="button"
+          id="resetProgress" class="reset-link">Reset progress</button></div>
+    </aside>
+    <div class="main-column">
+      <header class="topbar"><button class="icon-button menu-toggle" type="button" aria-label="Open navigation"
+          aria-controls="sidebar" aria-expanded="false" id="menuToggle">☰</button>
+        <div class="breadcrumbs">SICT235 <span>/</span> Flutter Codelabs <span>/</span> <b>Session 04</b></div>
+        <div class="top-actions"><span class="time-chip">◷ 120 min</span><button type="button" id="themeToggle"
+            class="icon-button" aria-label="Toggle light or dark mode"><span id="themeIcon">◐</span></button></div>
+      </header>
+      <main class="main-content" id="content" tabindex="-1">
+        <section class="lesson-step" data-step="0" id="section-1">
+          <div class="hero">
+            <div class="hero-copy"><span class="eyebrow">SESSION 04 · GUIDED PRACTICAL LAB</span>
+              <h1>From arrays to <br><em>expressive Dart.</em></h1>
+              <p>Collect. Transform. Reuse. Build.</p>
+              <div class="hero-tags"><span>Lists &amp; Arrays</span><span>Sets &amp;
+                  Maps</span><span>Cascades</span><span>Functions</span></div>
+            </div>
+          </div>
+          <div class="intro-line">
+            <div><span class="overline">START HERE · 08 MIN</span>
+              <h2>What you already know, expressed in Dart</h2>
+            </div><span class="duration">08 MIN</span>
+          </div>
+          <p class="lede">You already program in C# and JavaScript. In this lab, transfer those skills to Dart: its
+            array-equivalent <code>List</code>, other collections, expressive collection elements, cascades, and
+            function parameters. <strong>All examples are real Dart code.</strong></p>
+          <div class="learning-grid">
+            <div class="learning-card"><span class="kicker">THE BRIDGE</span>
+              <h3>Same problem, different collection APIs</h3>
+              <p>Find the Dart equivalent of arrays, lists, sets and dictionaries. Compare mutability, indexing and type
+                safety instead of relearning loops.</p>
+            </div>
+            <div class="learning-card"><span class="kicker">THE TARGET</span>
+              <h3>Read future Flutter code with confidence</h3>
+              <p>Spot <code>List&lt;Widget&gt;</code>, spreads, collection <code>if</code>, named parameters, and
+                callbacks before meeting them in Flutter widgets.</p>
+            </div>
+          </div>
+          <div class="s04-strip"><span>01 · Recall</span><span>02 · Compare</span><span>03 · Predict</span><span>04 ·
+              Run</span><span>05 · Adapt</span></div>
+          <h2 class="session03-small-heading">Prior-knowledge check · 10 short questions</h2>
+          <p class="lede">Review Session 03 and transferable C#/JavaScript concepts. Choose one answer per question;
+            feedback and a score appear immediately after evaluation.</p>
+          <form class="quiz-form" id="refresherQuiz">
+            <fieldset class="quiz-item">
+              <legend>1. Which concept stores a sequence of values in order?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz0" value="0" data-right="true"><span>A
+                    collection / array</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz0" value="1"
+                    data-right="false"><span>A Boolean condition</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz0" value="2"
+                    data-right="false"><span>A return type</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Arrays and ordered collections store multiple values in an indexed sequence.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>2. What is the first index in a typical zero-indexed array?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz1" value="0"
+                    data-right="false"><span>1</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz1" value="1"
+                    data-right="true"><span>0</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz1" value="2"
+                    data-right="false"><span>-1</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail" hidden>C#,
+                JavaScript and Dart Lists all index from zero.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>3. What is a common risk when two variables refer to the same mutable collection?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz2" value="0"
+                    data-right="false"><span>Both values must be constant</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz2" value="1"
+                    data-right="true"><span>Changes through one reference may be visible through the
+                    other</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz2" value="2"
+                    data-right="false"><span>Neither variable can use methods</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Shared reference identity means both variables may point to the same mutable object.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>4. Which structure is useful for unique items?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz3" value="0" data-right="true"><span>A
+                    Set</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz3" value="1"
+                    data-right="false"><span>A Map</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz3" value="2"
+                    data-right="false"><span>A List</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail" hidden>A Set
+                enforces uniqueness.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>5. Which structure is best for retrieving a value by a key?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz4" value="0"
+                    data-right="false"><span>A loop counter</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz4" value="1" data-right="true"><span>A
+                    Map / dictionary</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz4" value="2"
+                    data-right="false"><span>A plain String</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Maps/dictionaries associate unique keys with values.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>6. When does a function return a result to its caller?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz5" value="0"
+                    data-right="false"><span>When it displays a comment</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz5" value="1"
+                    data-right="true"><span>When it executes a return statement or expression body</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz5" value="2"
+                    data-right="false"><span>Whenever the program starts</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Functions with return values pass a result to the caller.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>7. Why are parameters useful?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz6" value="0"
+                    data-right="true"><span>They receive data at a function call</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz6" value="1"
+                    data-right="false"><span>They stop all loops</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz6" value="2"
+                    data-right="false"><span>They make strings nullable</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Parameters let the same function process different inputs.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>8. What does a callback mean?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz7" value="0"
+                    data-right="false"><span>A value stored in a Map</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz7" value="1" data-right="true"><span>A
+                    function passed to code to be called later</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz7" value="2"
+                    data-right="false"><span>A duplicate variable</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Callbacks are functions supplied to other code.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>9. Which operation most directly repeats an action for each item?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz8" value="0"
+                    data-right="true"><span>Iteration</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz8" value="1"
+                    data-right="false"><span>Type declaration</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz8" value="2"
+                    data-right="false"><span>String conversion</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Iteration visits the elements of a sequence or other iterable.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>10. Why should you validate a possibly missing value before using it?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz9" value="0"
+                    data-right="true"><span>To avoid invalid operations and runtime failures</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz9" value="1"
+                    data-right="false"><span>Because all values are Strings</span></label>
+                <label class="quiz-choice"><input type="radio" name="refresherQuiz9" value="2"
+                    data-right="false"><span>To remove all functions</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Validation and null-safety checks prevent unsafe operations on absent values.</span>
+            </fieldset>
+          </form>
+          <div class="session03-book-note"><strong>References:</strong> <em>Flutter and Dart Fundamentals</em>,
+            Chapters 4–5; <em>Flutter Cookbook</em>, Chapter 3 collections and cascades; official Dart language
+            reference.</div>
+        </section>
+        <section class="lesson-step" data-step="1" id="section-2" hidden>
+          <div class="section-top"><span class="overline">STEP 02 · ARRAYS → DART LISTS</span><span class="duration">11
+              MIN</span></div>
+          <h1 class="section-heading">Arrays in Dart? Meet List&lt;T&gt;</h1>
+          <p class="lede">Dart does have arrays in the everyday sense: <strong>arrays are <code>List</code>
+              objects</strong>. There is no separate built-in <code>int[]</code> declaration for ordinary Dart arrays.
+            For specialized binary buffers, Dart also provides fixed-size typed-data classes such as
+            <code>Uint8List</code> in <code>dart:typed_data</code>; those are not the everyday List API. Compare the
+            languages you already know before touching the syntax.
+          </p>
+          <div class="s04-compare-grid">
+            <article><span class="kicker">C# · FIXED ARRAY</span>
+              <h3><code>int[]</code></h3>
+              <pre>int[] scores = {72, 85, 90};</pre>
+              <p>Fixed length, strongly typed; use <code>List&lt;int&gt;</code> for dynamic resizing.</p>
+            </article>
+            <article><span class="kicker">JAVASCRIPT · ARRAY</span>
+              <h3><code>Array</code></h3>
+              <pre>const scores = [72, 85, 90];</pre>
+              <p>Resizes; allows mixed types unless constrained separately (e.g. TypeScript).</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">DART · LIST</span>
+              <h3><code>List&lt;int&gt;</code></h3>
+              <pre>final scores = &lt;int&gt;[72, 85, 90];</pre>
+              <p>Indexed, typed, normally growable. <code>final</code> protects the variable binding, not the elements.
+              </p>
+            </article>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Dart list basics</h3>
+              <p>A <code>List&lt;T&gt;</code> preserves order and permits duplicates. Indexes start at <code>0</code>;
+                last index = <code>length - 1</code>. <code>List&lt;String&gt;</code> contains strings, and
+                <code>var scores = [7, 9]</code> infers <code>List&lt;int&gt;</code>. Using the wrong element type is a
+                static error; using an invalid index raises a <code>RangeError</code>.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="arrays_intro">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>01 · An array in Dart is a List</h3>
+            <p>Predict the item at index 0 and the list after index 1 is replaced.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Arrays Intro</span><button type="button"
+                  data-copy="arrays_intro">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final List&lt;String&gt; students = [&#x27;Mira&#x27;, &#x27;Omar&#x27;, &#x27;Lina&#x27;];
+  print(students[0]);                // Mira, index starts at 0
+  print(students.length);           // 3
+  students[1] = &#x27;Sami&#x27;;             // replace at index 1
+  print(students);                  // [Mira, Sami, Lina]
+  // TODO: Add a fourth student using .add().
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Use <code>.add()</code> to grow the list, then try
+              reading an out-of-range index (expect a RangeError).</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Indexed access returns an element; assigning by index replaces an existing element.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p><code>students[1]</code> selects the second entry; index 0 selects the first.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="arrays_intro">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="arrays_intro" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="arrays_intro">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="s04-live-lab">
+            <div><span class="kicker">LIVE · ARRAY INDEX EXPLORER</span>
+              <h3>Click an index to inspect a List</h3>
+              <p>The selected index is a position, not a value. Try the final index and compare it with
+                <code>.length</code>.
+              </p>
+            </div>
+            <div class="s04-index-row" id="listIndexExplorer"><button type="button" data-idx="0">0 ·
+                Mira</button><button type="button" data-idx="1">1 · Omar</button><button type="button" data-idx="2">2 ·
+                Lina</button></div>
+            <p class="s04-sim-result" id="indexResult" role="status">Select an index above.</p>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="2" id="section-3" hidden>
+          <div class="section-top"><span class="overline">STEP 03 · LIST OPERATIONS</span><span class="duration">14
+              MIN</span></div>
+          <h1 class="section-heading">Creating and modifying Lists</h1>
+          <p class="lede">Know the difference between changing an element, changing a List’s length, and preventing all
+            changes. These details are not identical to C# arrays or JavaScript Arrays.</p>
+          <div class="learning-grid">
+            <div class="learning-card"><span class="kicker">GROWABLE</span>
+              <h3><code>[1, 2, 3]</code> and <code>&lt;int&gt;[]</code></h3>
+              <p>Ordinary literals create growable lists. Use <code>add</code>, <code>addAll</code>,
+                <code>insert</code>, <code>remove</code>, <code>removeAt</code> and <code>removeLast</code>.
+              </p>
+            </div>
+            <div class="learning-card"><span class="kicker">FIXED LENGTH</span>
+              <h3><code>List.filled(n, value)</code></h3>
+              <p>The default List length is fixed. Existing positions can be updated, but adding or removing fails
+                unless <code>growable: true</code>.</p>
+            </div>
+            <div class="learning-card"><span class="kicker">READ-ONLY CONTENT</span>
+              <h3><code>List.unmodifiable(...)</code></h3>
+              <p>No element replacement or length changes. A <code>const</code> List literal is also immutable.</p>
+            </div>
+            <div class="learning-card"><span class="kicker">NESTED LISTS</span>
+              <h3><code>List&lt;List&lt;int&gt;&gt;</code></h3>
+              <p>Represent tables or matrices using <code>grid[row][column]</code>. Validate both index levels.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="list_mutation">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>02 · Insert, remove and search</h3>
+            <p>Trace the list after each operation; note that <code>remove(value)</code> and
+              <code>removeAt(index)</code> mean different things.
+            </p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · List Mutation</span><button type="button"
+                  data-copy="list_mutation">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final modules = &lt;String&gt;[&#x27;Dart&#x27;, &#x27;SQL&#x27;, &#x27;Networks&#x27;];
+  modules.add(&#x27;Flutter&#x27;);
+  modules.insert(1, &#x27;C#&#x27;);
+  modules.remove(&#x27;SQL&#x27;);
+  final removed = modules.removeAt(0);
+  print(&#x27;Removed: $removed&#x27;);
+  print(&#x27;Now: $modules&#x27;);
+  print(&#x27;Flutter at index: ${modules.indexOf(&#x27;Flutter&#x27;)}&#x27;);
+  // TODO: Try .addAll([&#x27;Web&#x27;, &#x27;UI&#x27;]) and .removeLast().
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Add more courses with <code>addAll</code>; remove one
+              by value and one by index.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Insertion shifts later elements; removing shifts indexes; <code>indexOf</code> returns -1 if missing.
+              </p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="list_mutation">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="list_mutation" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="list_mutation">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="fixed_nested">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>03 · Fixed-length, unmodifiable and nested</h3>
+            <p>Compare fixed-length vs unmodifiable. Then read a cell in a two-dimensional List.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Fixed Nested</span><button type="button"
+                  data-copy="fixed_nested">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final fixed = List&lt;int&gt;.filled(3, 0); // cannot change length
+  fixed[1] = 25; // changing an item is allowed
+  print(fixed);
+  // fixed.add(4); // runtime UnsupportedError
+  final immutable = List&lt;int&gt;.unmodifiable([1, 2, 3]);
+  print(immutable);
+  final grid = &lt;List&lt;int&gt;&gt;[[10, 20], [30, 40]];
+  print(grid[1][0]); // 30
+  // TODO: Create a growable List.filled(..., growable: true).
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Uncomment the attempted <code>fixed.add(4)</code>;
+              predict the runtime failure before running.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>A fixed-length List can replace elements but not grow. An unmodifiable List allows neither.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="fixed_nested">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="fixed_nested" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="fixed_nested">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <h2 class="session03-small-heading">Reference semantics: assigning is not copying</h2>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+              <h3>Three important copy cases for Lists</h3>
+              <p>Like JavaScript arrays and C# reference-type collections, a Dart <code>List</code> is an object. So the
+                question is not only “did I make another variable?” but “did I make another structure?” Keep these three
+                cases separate:</p>
+            </div>
+          </div>
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0 22px;">
+            <article
+              style="display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg, rgba(30,136,229,.08), rgba(30,136,229,.03));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 20px rgba(16,40,62,.05);">
+              <div
+                style="font-size:.76rem;letter-spacing:.12em;font-weight:800;color:var(--accent);text-transform:uppercase;margin-bottom:8px;">
+                Option 1 · No copy</div>
+              <h3 style="margin:0 0 8px;font-size:1.02rem;">Shared reference</h3>
+              <p style="margin:0 0 10px;">Use <code>final b = a;</code>.<br> Both names point to the <strong>same List
+                  object</strong>.</p>
+              <pre class="code-sample" style="margin:auto 0 0;"><code>final a = [10, 20, 30];
+final b = a;
+
+b[0] = 99;
+// a and b both become [99, 20, 30]</code></pre>
+            </article>
+            <article
+              style="display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg, rgba(35,182,122,.10), rgba(35,182,122,.03));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 20px rgba(16,40,62,.05);">
+              <div
+                style="font-size:.76rem;letter-spacing:.12em;font-weight:800;color:#1d8f64;text-transform:uppercase;margin-bottom:8px;">
+                Option 2 · Shallow copy</div>
+              <h3 style="margin:0 0 8px;font-size:1.02rem;">New outer List</h3>
+              <p style="margin:0 0 10px;">Use <code>List.of(a)</code>, <code>List.from(a)</code>, or
+                <code>[...a]</code>.<br> The outer List is new, so changing a top-level element does not change the
+                original.
+              </p>
+              <pre class="code-sample" style="margin:auto 0 0;"><code>final a = [10, 20, 30];
+final b = [...a];
+
+b[0] = 99;
+// a stays [10, 20, 30]
+// b becomes [99, 20, 30]</code></pre>
+            </article>
+            <article
+              style="display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg, rgba(255,170,25,.12), rgba(255,170,25,.04));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 20px rgba(16,40,62,.05);">
+              <div
+                style="font-size:.76rem;letter-spacing:.12em;font-weight:800;color:#b26a00;text-transform:uppercase;margin-bottom:8px;">
+                Option 3 · Nested caveat</div>
+              <h3 style="margin:0 0 8px;font-size:1.02rem;">Inner objects still shared</h3>
+              <p style="margin:0 0 10px;">A shallow copy only copies the outer List. If the items are Lists or other
+                mutable objects, the inner objects are still shared.</p>
+              <pre class="code-sample" style="margin:auto 0 0;"><code>final a = [[1, 2], [3, 4]];
+final b = [...a];
+
+b[0][0] = 99;
+// a also changes to [[99, 2], [3, 4]]</code></pre>
+            </article>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+              <h3>What “shallow copy” really means</h3>
+              <p><code>final b = a;</code> gives you a second name for the same object. A shallow copy such as
+                <code>List.of(a)</code>, <code>List.from(a)</code>, or <code>[...a]</code> gives you a <strong>new outer
+                  List</strong>. That is enough for one-dimensional Lists of numbers, strings, and other simple values.
+                But for nested Lists, a shallow copy does <strong>not</strong> clone the inner Lists. To make nested
+                structures independent, copy the inner Lists too, for example
+                <code>[for (final inner in a) [...inner]]</code>.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="references">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>04 · No copy, shallow copy, and nested Lists</h3>
+            <p>Run the code and compare the three situations: same object, new outer List, and shallow copy with nested
+              Lists.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Copying Lists</span><button type="button"
+                  data-copy="references">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  // 1) No copy: shared reference
+  final numbers = [10, 20, 30];
+  final same = numbers;
+  same[0] = 99;
+  print('numbers:      $numbers');
+  print('same:         $same');
+  print(identical(numbers, same)); // true
+
+  // 2) Shallow copy: new outer list
+  final original = [1, 2, 3];
+  final copy = [...original];
+  copy[1] = 200;
+  print('original:     $original');
+  print('copy:         $copy');
+  print(identical(original, copy)); // false
+
+  // 3) Nested lists: inner lists still shared
+  final nested = [
+    [1, 2],
+    [3, 4],
+  ];
+  final nestedShallow = [...nested];
+  nestedShallow[0][0] = 500;
+  print('nested:       $nested');
+  print('nestedShallow:$nestedShallow');
+
+  // To separate nested lists too:
+  final nestedIndependent = [for (final inner in nested) [...inner]];
+  nestedIndependent[1][1] = 900;
+  print('nestedIndep:  $nestedIndependent');
+  print('nested after independent copy: $nested');
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Replace <code>[...original]</code> with
+              <code>List.of(original)</code> or <code>List.from(original)</code>. Then change one inner value in
+              <code>nestedIndependent</code> and explain why <code>nested</code> no longer changes.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p><code>same</code> changes with <code>numbers</code>; <code>copy</code> is independent;
+                <code>nestedShallow</code> still shares inner Lists; <code>nestedIndependent</code> becomes fully
+                separate for this two-dimensional example.
+              </p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Ask two questions each time: “Is the outer List the same object?” and “Are the inner Lists the same
+                objects?” That distinction explains all four outputs.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="references">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="references" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="references">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="3" id="section-4" hidden>
+          <div class="section-top"><span class="overline">STEP 04 · ITERATION & METHODS</span><span class="duration">12
+              MIN</span></div>
+          <h1 class="section-heading">Iterating, searching and transforming</h1>
+          <p class="lede">Loops were covered in Session 03. Today the emphasis is on <em>choosing</em> the right
+            iteration style, the List API, and functions passed into collection methods.</p>
+          <div class="s04-three">
+            <div><span class="kicker">POSITION NEEDED</span><strong>Indexed <code>for</code></strong>
+              <p>Read <code>scores[i]</code> when you need the index or want to update an element.</p>
+            </div>
+            <div><span class="kicker">VALUES ONLY</span><strong><code>for-in</code></strong>
+              <p>Avoid indexing mistakes: <code>for (final score in scores)</code>.</p>
+            </div>
+            <div><span class="kicker">FUNCTION CALLBACK</span><strong><code>forEach()</code></strong>
+              <p>Pass a function that processes each item. We revisit callbacks in Step 11.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="iteration">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>05 · Three ways to visit values</h3>
+            <p>Recognize when to use indexes and when a direct value loop is simpler.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Iteration</span><button type="button"
+                  data-copy="iteration">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final scores = [72, 91, 66];
+  for (var i = 0; i &lt; scores.length; i++) {
+    print(&#x27;Index $i: ${scores[i]}&#x27;);
+  }
+  for (final score in scores) {
+    print(&#x27;Value: $score&#x27;);
+  }
+  scores.forEach((score) =&gt; print(&#x27;Callback: $score&#x27;));
+  // TODO: Print only values &gt;= 70 using for-in.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Rewrite the filtering using <code>for-in</code> and a
+              Boolean condition.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>All three print the same data; the iteration API changes the form of your code.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="iteration">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="iteration" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="iteration">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="list_methods">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>06 · Useful List properties and methods</h3>
+            <p>Compare <code>length</code>, <code>isEmpty</code>, <code>contains</code>, <code>indexOf</code>,
+              <code>reversed</code>, and <code>join</code>.
+            </p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · List Methods</span><button type="button"
+                  data-copy="list_methods">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final names = [&#x27;Mira&#x27;, &#x27;Omar&#x27;, &#x27;Lina&#x27;];
+  print(names.length);
+  print(names.isEmpty);
+  print(names.contains(&#x27;Mira&#x27;));
+  print(names.indexOf(&#x27;Omar&#x27;));
+  print(names.reversed.toList()); // new reversed list
+  print(names.join(&#x27; / &#x27;));
+  print(names); // original still unchanged
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Check an absent name; observe <code>-1</code> from
+              <code>indexOf</code>.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p><code>reversed</code> is an Iterable view; call <code>toList()</code> for a List. <code>join()</code>
+                creates a String.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="list_methods">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="list_methods" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="list_methods">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>A useful extension: <code>map</code>, <code>where</code>, <code>toList</code></h3>
+              <p>You may recognize <code>.map()</code> and <code>.filter()</code> from JavaScript. In Dart,
+                <code>where((x) =&gt; condition)</code> filters, and <code>map((x) =&gt; expression)</code> transforms.
+                They return lazy <code>Iterable</code> sequences; use <code>.toList()</code> when a concrete List is
+                required. This prepares you for callbacks and higher-order functions.
+              </p>
+            </div>
+          </div>
+          <div class="check-card"><span class="kicker">PREDICT · QUICK CHECK</span>
+            <p><strong>Which loop best communicates “give me the values only; I do not care about indexes”?</strong></p>
+            <div class="answer-buttons"><button type="button" data-correct="true">for-in</button><button type="button"
+                data-correct="false">An indexed for loop only</button></div>
+            <p class="quiz-feedback" aria-live="polite">Choose an answer.</p><span class="answer-detail" hidden>Use
+              for-in when you only need element values; indexed for is appropriate when positions matter.</span>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="4" id="section-5" hidden>
+          <div class="section-top"><span class="overline">STEP 05 · SETS</span><span class="duration">09 MIN</span>
+          </div>
+          <h1 class="section-heading">Sets: unique values, useful operations</h1>
+          <p class="lede">A Set is not another array. Use it when uniqueness and membership matter more than indexed
+            positions.</p>
+          <div class="s04-mini-map">
+            <div><span class="kicker">LIST</span><strong>[ Dart, SQL, Dart ]</strong><small>Duplicates allowed</small>
+            </div><span class="s04-big-arrow">→</span>
+            <div><span class="kicker">SET</span><strong>{ Dart, SQL }</strong><small>Duplicates removed</small></div>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3><code>Set&lt;T&gt;</code> rules</h3>
+              <p>A Set contains unique elements, offers <code>add</code>, <code>addAll</code>, <code>remove</code>,
+                <code>contains</code>, and set algebra: <code>union</code>, <code>intersection</code>,
+                <code>difference</code>. It has no indexed <code>set[0]</code> access. In standard Dart, Set literals
+                generally use insertion-ordered sets, but you should not rely on index access as an API. An empty Set is
+                <code>&lt;String&gt;{}</code>; plain <code>{}</code> creates a Map.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="set_unique">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>07 · Make a Set of unique modules</h3>
+            <p>Predict what happens when you insert a repeated module.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Set Unique</span><button type="button"
+                  data-copy="set_unique">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final modules = &lt;String&gt;{&#x27;Dart&#x27;, &#x27;SQL&#x27;, &#x27;Dart&#x27;};
+  print(modules); // duplicate is omitted
+  modules.add(&#x27;Flutter&#x27;);
+  modules.add(&#x27;Flutter&#x27;);
+  print(modules.contains(&#x27;SQL&#x27;)); // true
+  print(&#x27;Unique count: ${modules.length}&#x27;);
+  // Empty set: &lt;String&gt;{}; empty {} is a Map!
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Replace one module; try <code>var empty = {}</code> and
+              inspect its runtime type.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Duplicate values are ignored. The empty literal without context is a Map.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="set_unique">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="set_unique" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="set_unique">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="set_ops">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>08 · Intersection and difference</h3>
+            <p>Find modules studied in both groups and modules unique to one group.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Set Ops</span><button type="button"
+                  data-copy="set_ops">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final a = &lt;String&gt;{&#x27;Dart&#x27;, &#x27;Flutter&#x27;, &#x27;SQL&#x27;};
+  final b = &lt;String&gt;{&#x27;SQL&#x27;, &#x27;Networks&#x27;, &#x27;Flutter&#x27;};
+  print(&#x27;Union: ${a.union(b)}&#x27;);
+  print(&#x27;Both: ${a.intersection(b)}&#x27;);
+  print(&#x27;Only A: ${a.difference(b)}&#x27;);
+  print(&#x27;As a list: ${a.toList()}&#x27;);
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Reverse the difference operands and compare the result.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p><code>A.difference(B)</code> is not generally equal to <code>B.difference(A)</code>.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="set_ops">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="set_ops" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="set_ops">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="5" id="section-6" hidden>
+          <div class="section-top"><span class="overline">STEP 06 · MAPS</span><span class="duration">10 MIN</span>
+          </div>
+          <h1 class="section-heading">Maps: key-value records</h1>
+          <p class="lede">Maps correspond to C# <code>Dictionary&lt;K, V&gt;</code> and JavaScript <code>Map</code> or a
+            plain object for simple keys. Use them when the key—not the index—identifies the data.</p>
+          <div class="s04-key-value"><span class="s04-kv-label">KEY</span><span
+              class="s04-kv-label">VALUE</span><strong>'Mira'</strong><code>92</code><strong>'Omar'</strong><code>78</code><strong>'Lina'</strong><code>85</code>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Typed Map fundamentals</h3>
+              <p>Use <code>Map&lt;String, int&gt;</code> for student names and scores. <code>scores["Mira"]</code>
+                returns
+                <code>int?</code> because the key may not exist. <code>containsKey</code>, <code>containsValue</code>,
+                <code>remove</code>, <code>keys</code>, <code>values</code> and <code>entries</code> are common
+                operations. Empty <code>{}</code> is inferred as a Map unless the surrounding type gives Set context.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="map_basics">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>09 · Create, update and query a Map</h3>
+            <p>Read one score, modify another, delete a key, then request a missing key.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Map Basics</span><button type="button"
+                  data-copy="map_basics">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final scores = &lt;String, int&gt;{&#x27;Mira&#x27;: 92, &#x27;Omar&#x27;: 78};
+  scores[&#x27;Lina&#x27;] = 85;              // insert
+  scores[&#x27;Omar&#x27;] = 81;              // update
+  print(scores[&#x27;Mira&#x27;]);           // 92
+  print(scores[&#x27;Nobody&#x27;]);         // null: not found
+  print(scores.containsKey(&#x27;Lina&#x27;));
+  print(scores.remove(&#x27;Omar&#x27;));    // 81
+  print(scores);
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Use <code>scores["Nobody"] ?? 0</code> and explain the
+              fallback.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Reading a missing key yields null. <code>??</code> is the same null-safe fallback learned in Session
+                03.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="map_basics">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="map_basics" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="map_basics">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="map_entries">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>10 · Visit keys and values</h3>
+            <p>Read the <code>entries</code> API and the two-parameter <code>forEach</code> callback.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Map Entries</span><button type="button"
+                  data-copy="map_entries">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final hours = &lt;String, int&gt;{&#x27;Dart&#x27;: 6, &#x27;SQL&#x27;: 4};
+  print(hours.keys.toList());
+  print(hours.values.toList());
+  for (final entry in hours.entries) {
+    print(&#x27;${entry.key}: ${entry.value} hours&#x27;);
+  }
+  hours.forEach((course, duration) {
+    print(&#x27;$course takes $duration hours&#x27;);
+  });
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Change duration of one module and predict the new
+              output.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>A Map entry exposes <code>entry.key</code> and <code>entry.value</code>.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="map_entries">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="map_entries" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="map_entries">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="6" id="section-7" hidden>
+          <div class="section-top"><span class="overline">STEP 07 · COLLECTION ELEMENTS</span><span class="duration">10
+              MIN</span></div>
+          <h1 class="section-heading">Collection if, collection for and spread</h1>
+          <p class="lede">One of Dart’s most useful differences from familiar loops: build collections directly inside
+            <code>[]</code>, <code>{}</code>, and Maps with control-flow elements.
+          </p>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>A <code>for</code> element is not a normal <code>for</code> body</h3>
+              <p>In <code>[for (final x in values) x * 2]</code>, each evaluated expression contributes one element. No
+                explicit <code>.add()</code> or <code>return</code> is needed. An <code>if</code> element contributes an
+                element only if its condition matches. These can be nested.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="collection_for">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>11 · Dart’s collection for + if</h3>
+            <p>Observe <code>final doubled = [for (final n in randomNumbers) n * 2];</code> from our previous
+              discussion.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Collection For</span><button type="button"
+                  data-copy="collection_for">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final randomNumbers = [2, 5, 8, 10];
+  final doubled = [
+    for (final number in randomNumbers) number * 2,
+  ];
+  final doubledEven = [
+    for (final number in randomNumbers)
+      if (number.isEven) number * 2,
+  ];
+  print(doubled);     // [4, 10, 16, 20]
+  print(doubledEven); // [4, 16, 20]
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Change the numbers and predict which doubled values
+              survive the <code>if</code>.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>A collection for inserts each expression result into a newly built List.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="collection_for">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="collection_for" target="_blank"
+                rel="noopener noreferrer">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="collection_for">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Spread <code>...</code></h3>
+              <p><code>...items</code> inserts elements from one collection into a new collection.
+                <br><code>...?items</code>
+                safely inserts nothing if the source is null.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="spread">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>12 · Spread, null-aware spread and conditional elements</h3>
+            <p>Combine two lists without nested lists; include a group only when a condition is true.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Spread</span><button type="button"
+                  data-copy="spread">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  final base = [&#x27;Dart&#x27;, &#x27;SQL&#x27;];
+  final extra = [&#x27;Flutter&#x27;, &#x27;Networks&#x27;];
+  final isAdvanced = true;
+  final all = [
+    &#x27;Orientation&#x27;,
+    ...base,
+    if (isAdvanced) ...extra,
+  ];
+  List&lt;String&gt;? optional;
+  final safe = [&#x27;Start&#x27;, ...?optional, &#x27;End&#x27;];
+  print(all);
+  print(safe); // no crash when optional is null
+  // TODO: Change isAdvanced to false.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Remove <code>...</code> before <code>extra</code> and
+              predict the type/shape change.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Spread unpacks elements; <code>...?optional</code> handles a nullable collection without failing.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="spread">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="spread" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="spread">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="7" id="section-8" hidden>
+          <div class="section-top"><span class="overline">STEP 08 · DART A · CASCADES</span><span class="duration">10
+              MIN</span></div>
+          <h1 class="section-heading">Cascades: operate on one object</h1>
+          <p class="lede">Primary reference for this topic: <em>Dart A</em>, Chapter 3, “Taking advantage of the cascade
+            operator.” This is not merely syntactic sugar for calling methods in a chain.</p>
+          <div class="s04-compare-grid s04-two">
+            <article><span class="kicker">WITHOUT CASCADE</span>
+              <pre>final values = [3, 1, 2];
+values.insert(0, 8);
+values.sort();</pre>
+              <p>Repeat <code>values</code> for each operation.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">WITH CASCADE</span>
+              <pre>final values = [3, 1, 2]
+  ..insert(0, 8)
+  ..sort();</pre>
+              <p>Every <code>..</code> operates on the original List</p>
+            </article>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Why the return type matters</h3>
+              <p>Ordinary method chaining, <code>object.methodA().methodB()</code>, calls <code>methodB</code> on the
+                <em>return value of methodA</em>. Cascades, <code>object..methodA()..methodB()</code>, keep the original
+                receiver regardless of individual method return values. <code>?..</code> starts a null-shorting cascade
+                when the original receiver may be null; it skips subsequent cascade operations if null.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="cascade_list">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>13 · insert + sort on one List</h3>
+            <p>Predict the final List and why there is no return-value conflict.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Cascade List</span><button type="button"
+                  data-copy="cascade_list">Copy code</button></div>
+              <pre class="code-sample"><code>void main() {
+  // Based on the cascade example in Dart A, Chapter 3.
+  final numbers = [3, 1, 2]
+    ..insert(0, 8)
+    ..sort((a, b) =&gt; a.compareTo(b));
+  print(numbers);   // [1, 2, 3, 8]
+  print(numbers.last); // 8
+  // insert and sort both return void; cascade keeps the List.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Try <code>..remove(53)</code> and print the result;
+              explain why it still refers to the List.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The original List remains the cascade result, not the <code>void</code> returned by
+                <code>sort()</code>.
+              </p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="cascade_list">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="cascade_list" target="_blank" rel="noopener noreferrer">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="cascade_list">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+            <div class="s04-live-lab"><span class="kicker">INTERACTIVE · CASCADE TRACE</span>
+              <h3>What does each <code>..</code> touch?</h3>
+              <div class="s04-sim-actions"><button type="button" id="cascadeStep">Run next operation</button><button
+                  type="button" id="cascadeReset" class="s04-quiet">Reset</button></div>
+              <ol id="cascadeHistory" class="s04-trace-list" aria-live="polite">
+                <li>Start: <code>[3, 1, 2]</code></li>
+              </ol>
+              <p class="mini-copy">Simulation only: the runnable Dart version is in the code card above.</p>
+            </div>
+
+            <div class="check-card"><span class="kicker">PREDICT · QUICK CHECK</span>
+              <p><strong>After <code>list..sort()</code>, what is the expression’s value?</strong></p>
+              <div class="answer-buttons"><button type="button" data-correct="true">The same List object</button><button
+                  type="button" data-correct="false">The void result of sort()</button></div>
+              <p class="quiz-feedback" aria-live="polite">Choose an answer.</p><span class="answer-detail"
+                hidden>Cascade
+                expressions evaluate to the receiver object, even when a member operation returns void.</span>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="cascade_builder">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+
+
+
+            <h3>14 · Configuring a UrlBuilder</h3>
+            <p>This book example comes from the <strong>advanced</strong> cookbook chapter. It anticipates OOP, but you
+              only need to
+              observe that the three property assignments target one object.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Cascade Builder</span><button type="button"
+                  data-copy="cascade_builder">Copy code</button></div>
+              <pre class="code-sample"><code>class UrlBuilder {
+  String scheme = &#x27;&#x27;;
+  String host = &#x27;&#x27;;
+  List&lt;String&gt; routes = [];
+
+  @override
+  String toString() =&gt; &#x27;$scheme://${[host, ...routes].join(&#x27;/&#x27;)}&#x27;;
+}
+void main() {
+  // Adapted from cookbook&#x27;s UrlBuilder cascade example.
+  //note this
+  final url = UrlBuilder()
+    ..scheme = &#x27;https&#x27; 
+    ..host = &#x27;dart.dev&#x27;
+    ..routes = [&#x27;guides&#x27;, &#x27;language&#x27;];
+  print(url); // https://dart.dev/guides/language
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Add a third route and print the resulting URL. Leave
+              class internals for Session 05.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Cascade syntax can set properties on the same object without repeating its variable name.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="cascade_builder">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="cascade_builder" target="_blank"
+                rel="noopener noreferrer">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="cascade_builder">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+
+
+        </section>
+        <section class="lesson-step" data-step="8" id="section-9" hidden>
+          <div class="section-top"><span class="overline">STEP 09 · FUNCTIONS & SCOPE</span><span class="duration">11
+              MIN</span></div>
+          <h1 class="section-heading">Functions: define, return, reuse</h1>
+          <p class="lede">Putting everything inside
+            <code>main()</code> does not scale. Dart functions make behavior reusable and prepare you for Flutter
+            methods and callbacks.
+          </p>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Function anatomy</h3>
+              <p>A normal Dart function has a return type, name, parameter list and body:
+                <code>int add(int a, int b) { return a + b; }</code>.<br> <code>void</code> means the function does not
+                return
+                a useful value. <br><code>return</code> sends a result (if any) to the caller and ends the function.
+                <br>The
+                <code>=&gt;</code> arrow shorthand only supports a single expression (with the return keyword omitted)
+                and cannot contain a
+                multi-statement block.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="functions_basics">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>15 · Named functions and return values</h3>
+            <p>Trace <code>void</code>, <code>int</code> and <code>bool</code> return types and identify function calls.
+            </p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Functions Basics</span><button type="button"
+                  data-copy="functions_basics">Copy code</button></div>
+              <pre class="code-sample"><code>int add(int a, int b) {
+  return a + b;
+}
+void greet(String name) {
+  print(&#x27;Welcome, $name!&#x27;);
+}
+bool isPassing(int score) =&gt; score &gt;= 60;
+
+void main() {
+  greet(&#x27;Mira&#x27;);
+  print(add(4, 5));
+  print(isPassing(72));
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Write <code>double toFahrenheit(double c)</code> using
+              <code>c * 9 / 5 + 32</code>.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p><code>add()</code> returns a number; <code>greet()</code> performs an action; arrow syntax computes a
+                Boolean expression.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="functions_basics">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="functions_basics" target="_blank"
+                rel="noopener noreferrer">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="functions_basics">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Scope: know where a name exists</h3>
+              <p>Dart has top-level, function and block scope. An identifier declared inside an <code>if</code> block or
+                loop is not visible outside it. Function parameters belong to that function. Prefer small local scopes;
+                avoid mutable globals that create hard-to-debug dependencies.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="scope">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>16 · Top-level versus local versus block</h3>
+            <p>Identify which variable is visible where, and why uncommenting the final statement fails.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Scope</span><button type="button" data-copy="scope">Copy
+                  code</button></div>
+              <pre class="code-sample"><code>const String programName = &#x27;PDB2&#x27;; // top-level scope
+
+void main() {
+  final greeting = &#x27;Hello&#x27;; // local to main
+  if (greeting.isNotEmpty) {
+    final student = &#x27;Mira&#x27;; // block scope
+    print(&#x27;$greeting $student · $programName&#x27;);
+  }
+  // print(student); // compile-time error: out of scope
+  // TODO: Move the second print into the if block.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Move the out-of-scope print inside the block.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Nested scopes can read outer names; outer scopes cannot access names declared only inside an inner
+                block.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="scope">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="scope" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="scope">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="9" id="section-10" hidden>
+          <div class="section-top"><span class="overline">STEP 10 · PARAMETERS</span><span class="duration">11
+              MIN</span></div>
+          <h1 class="section-heading">Positional, optional and named parameters</h1>
+          <p class="lede">This is the most Flutter-relevant function topic: most widget constructors use named
+            parameters.</p>
+          <div class="s04-parameter-grid">
+            <div><span class="kicker">REQUIRED POSITIONAL</span><code>int sum(int a, int b)</code>
+              <p>Call <code>sum(2, 3)</code>; order matters.</p>
+            </div>
+            <div><span class="kicker">OPTIONAL POSITIONAL</span><code>f(int x, [int y = 1])</code>
+              <p>Brackets <code>[]</code> and default values.</p>
+            </div>
+            <div><span class="kicker">OPTIONAL NAMED</span><code>f({bool enabled = false})</code>
+              <p>Curly braces; named arguments can appear in any order.</p>
+            </div>
+            <div><span class="kicker">REQUIRED NAMED</span><code>f({required String name})</code>
+              <p><code>required</code> forces the caller to supply the name.</p>
+            </div>
+          </div>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Null safety meets parameters</h3>
+              <p>A named parameter without <code>required</code> must either have a default value or allow
+                <code>null</code> (e.g. <code>String? title</code>). A function can have required positional parameters
+                followed by <em>named</em> or <em>optional positional</em> parameters, not both groups together.
+                <code>required</code> can make a named argument mandatory even when its type is nullable.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="parameters">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>17 · Optional positionals and named arguments</h3>
+            <p>Call functions with defaults, override them, and notice how <code>room ?? "Online"</code> interacts with
+              nullable values.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Parameters</span><button type="button"
+                  data-copy="parameters">Copy code</button></div>
+              <pre class="code-sample"><code>String greet(String name, [String greeting = &#x27;Hello&#x27;]) {
+  return &#x27;$greeting, $name&#x27;; // optional positional uses []
+}
+
+void showCourse(
+  String course, {
+  required String instructor,
+  int duration = 120,
+  String? room,
+}) {
+  print(&#x27;$course · $instructor · $duration min · ${room ?? &#x27;Online&#x27;}&#x27;);
+}
+
+void main() {
+  print(greet(&#x27;Mira&#x27;));
+  print(greet(&#x27;Mira&#x27;, &#x27;Welcome&#x27;));
+  showCourse(&#x27;Dart&#x27;, instructor: &#x27;Aya&#x27;);
+  showCourse(&#x27;Flutter&#x27;, instructor: &#x27;Aya&#x27;, duration: 90);
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Omit <code>instructor:</code> from
+              <code>showCourse()</code> and inspect the analyzer message.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Named arguments improve readability and are foundational to Flutter widget configuration.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="parameters">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="parameters" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="parameters">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="s04-live-lab"><span class="kicker">INTERACTIVE · ARGUMENT BUILDER</span>
+            <h3>See named arguments as you configure a call</h3>
+            <div class="s04-control-row"><label>Instructor <input id="argInstructor" value="Aya"
+                  maxlength="30"></label><label>Minutes <select id="argMinutes">
+                  <option>120</option>
+                  <option>90</option>
+                  <option>60</option>
+                </select></label></div>
+            <pre class="s04-live-code"
+              id="argumentPreview">showCourse(&#39;Dart&#39;, instructor: &#39;Aya&#39;, duration: 120);</pre>
+            <p class="mini-copy">The preview changes the Dart call, not the function definition. Copy the parameters
+              example to run it.</p>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="10" id="section-11" hidden>
+          <div class="section-top"><span class="overline">STEP 11 · FUNCTION OBJECTS & CALLBACKS</span><span
+              class="duration">10 MIN</span></div>
+          <h1 class="section-heading">Arrow functions, callbacks and higher-order functions</h1>
+          <p class="lede">Dart treats functions as objects: you can assign one to a variable, pass it to another
+            function, and return a function. The C# equivalents include delegates/lambdas; JavaScript has first-class
+            functions.</p>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Arrow, anonymous, callback, higher-order</h3>
+              <p>Use <code>int square(int n) =&gt; n * n;</code> for one expression.<br> An anonymous function has no
+                name,
+                e.g. <code>(n) { print(n); }</code>. Passing it to <code>forEach</code> makes it a <em>callback</em>.
+                <br>Any
+                function that receives or returns another function is <em>higher-order</em>. Typed signatures such as
+                <code>int Function(int)</code> convey the exact contract.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="callbacks">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>18 · Callbacks and typed transforms</h3>
+            <p>Read the typed callback signature: <code>int Function(int)</code> accepts an integer and returns an
+              integer.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Callbacks</span><button type="button"
+                  data-copy="callbacks">Copy code</button></div>
+              <pre class="code-sample"><code>List&lt;int&gt; transform(List&lt;int&gt; source, int Function(int) change) {
+  return [for (final number in source) change(number)];
+}
+void main() {
+  final scores = [70, 85, 90];
+  final curved = transform(scores, (score) =&gt; score + 5);
+  print(curved);
+  final doubleNumber = (int value) =&gt; value * 2;
+  print(doubleNumber(6));
+  scores.forEach((score) =&gt; print(&#x27;Score: $score&#x27;));
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Try a callback that subtracts 5; compare it with C#
+              delegates and JavaScript <code>.map()</code>.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p><code>transform</code> is higher-order because it takes a function argument.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="callbacks">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="callbacks" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="callbacks">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="concept-card"
+            style="display:grid;grid-template-columns:clamp(58px,9vw,98px) minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;">
+            <div class="concept-mascot" aria-hidden="true" style="width:100%;align-self:center;">
+              <img src="images/dash-study-mascot.webp" alt="" loading="lazy" decoding="async"
+                style="width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(12,46,80,.12));">
+            </div>
+            <div class="concept-speech"
+              style="min-width:0;position:relative;background:var(--paper2);border:1px solid var(--line);border-radius:17px;padding:clamp(12px,2vw,19px);overflow-wrap:anywhere;">
+              <span aria-hidden="true"
+                style="position:absolute;top:24px;left:-9px;width:17px;height:17px;transform:rotate(45deg);background:var(--paper2);border-left:1px solid var(--line);border-bottom:1px solid var(--line);"></span>
+
+              <h3>Closures (Quick Concept)</h3>
+              <p>A <strong>closure</strong> is a function that "remembers" variables from where it was created, even
+                after the outer function finishes. <br>For example:
+              </p>
+              <pre class="code-sample">Function makeAdder(int step) {
+  // This inner function remembers 'step'
+  return (int n) {
+    return n + step;
+  };
+}</pre>
+              <p>
+                The inner function
+                remembers <code>step</code> even after <code>makeAdder</code> has finished, the exact same concept
+                Flutter
+                uses when a button handler needs to remember data from your screen.
+              </p>
+            </div>
+          </div>
+          <div class="check-card"><span class="kicker">PREDICT · QUICK CHECK</span>
+            <p><strong>What does <code>items.forEach((value) =&gt; print(value))</code> pass to
+                <code>forEach</code>?</strong></p>
+            <div class="answer-buttons"><button type="button" data-correct="false">The output from
+                print()</button><button type="button" data-correct="true">An anonymous function (callback)</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite">Choose an answer.</p><span class="answer-detail" hidden>A
+              callback is the function itself; it is invoked for each item by forEach.</span>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="11" id="section-12" hidden>
+          <div class="section-top"><span class="overline">STEP 12 · APPLICATION & HOMEWORK</span><span
+              class="duration">04 MIN</span></div>
+          <h1 class="section-heading">Integrated practice and book-based homework</h1>
+          <p class="lede">Use the concepts together, then complete the independent “Try It Yourself” exercises after
+            class. They build on Chapters 4–5 rather than repeating the old Session 03 homework.</p>
+          <section class="practice-card" data-exercise="integrated">
+            <div class="activity-tags"><span>GUIDED · PREDICT → RUN → MODIFY</span><span>DartPad / local Dart SDK</span>
+            </div>
+            <h3>19 · Mini student-score analyzer</h3>
+            <p>This one example combines List, Set, for-in, named parameters, return values and formatting.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Dart · Integrated</span><button type="button"
+                  data-copy="integrated">Copy code</button></div>
+              <pre class="code-sample"><code>double average(List&lt;int&gt; scores) {
+  if (scores.isEmpty) return 0;
+  var total = 0;
+  for (final score in scores) { total += score; }
+  return total / scores.length;
+}
+void summary({required String module, required List&lt;int&gt; scores}) {
+  final unique = scores.toSet();
+  print(&#x27;$module | ${scores.length} entries | ${unique.length} unique&#x27;);
+  print(&#x27;Average: ${average(scores).toStringAsFixed(1)}&#x27;);
+}
+void main() {
+  final scores = [75, 90, 75, 60, 95];
+  summary(module: &#x27;Dart Fundamentals&#x27;, scores: scores);
+  // TODO: Add a new score and update the average.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Try it:</strong> Extend it to accept a
+              <code>Map&lt;String, List&lt;int&gt;&gt;</code> of course scores.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>A single function can summarize multiple collections using typed parameters.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Trace the code before pressing Run. Then explain how the output changes after your edit.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" type="button"
+                data-activity="integrated">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                href="https://dartpad.dev/" data-activity="integrated" target="_blank" rel="noopener noreferrer">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="integrated">
+              <p class="embed-status">The editor loads on click when a public Gist is connected. Otherwise, copy the
+                complete code above into DartPad or a local <code>main.dart</code>.</p>
+            </div>
+          </section>
+          <div class="assignment-card"><span class="kicker">CHAPTERS 4–5 · TRY IT YOURSELF</span>
+            <h3>Session 04 homework</h3>
+            <p>Complete the <strong>three required exercises</strong> and choose an extension if ready. These are
+              original classroom instructions <em>adapted from the book’s tasks</em>; the book remains the full
+              reference.</p>
+            <ol class="steps-list">
+              <li><strong>List Statistics (Chapter 4):</strong> manually calculate sum, average, highest and lowest from
+                a List, using a loop rather than sort/reduce.</li>
+              <li><strong>Remove Duplicates (Chapter 4):</strong> construct an ordered result List containing each
+                source word only once.</li>
+              <li><strong>Temperature Converter Functions (Chapter 5):</strong> write both conversion functions, print
+                one-decimal results and then compare with arrow-function versions.</li>
+              <li><strong>Extension:</strong> implement the <em>List Applier</em> higher-order function; optional
+                further task: Atbash Cipher.</li>
+            </ol>
+            <p><strong>Submission:</strong> one <code>StudentName.dart</code> file with a single <code>main()</code>,
+              your own implementation, clear output, and attribution for external help. Test in DartPad or locally.
+              Download the detailed PDF or starter below.</p>
+            <div class="s04-download-row"><a class="primary-button" href="assignment/Homework.pdf" download>↓ Download
+                Homework PDF</a><a class="ghost-button" href="assignment/StudentName.dart" download>↓ Dart starter</a>
+            </div>
+          </div>
+          <div class="s04-next"><span class="kicker">NEXT · SESSION 05</span>
+            <h3>Objects, classes and constructors</h3>
+            <p>Fields, constructors, getters/setters, encapsulation, inheritance, interfaces and mixins. You already
+              used a small <code>UrlBuilder</code> today; next session explains how to build such classes yourself.</p>
+          </div>
+          <div class="completion-message" id="completionMessage" hidden>
+            <div class="confetti">✦ ✳︎ ✦ ✳︎ ✦</div>
+            <h3>Session 04 complete!</h3>
+            <p>Arrays in Dart = Lists. You can work with collections, use cascades and write Flutter-ready functions.
+            </p>
+          </div>
+          <h2 class="session03-small-heading">Exit check · test your understanding</h2>
+          <form class="quiz-form" id="exitQuiz">
+            <fieldset class="quiz-item">
+              <legend>1. What is Dart’s normal array-equivalent?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz0" value="0"
+                    data-right="true"><span>List</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz0" value="1"
+                    data-right="false"><span>Map</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz0" value="2"
+                    data-right="false"><span>Function</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail" hidden>Dart
+                List is the regular indexed array-like collection.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>2. What does a Set enforce?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz1" value="0" data-right="true"><span>Unique
+                    elements</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz1" value="1" data-right="false"><span>One
+                    index for every key</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz1" value="2" data-right="false"><span>Only
+                    decimal numbers</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail" hidden>Sets
+                ignore duplicate insertions.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>3. What does a missing Map key return when read with []?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz2" value="0"
+                    data-right="true"><span>null</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz2" value="1"
+                    data-right="false"><span>-1</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz2" value="2"
+                    data-right="false"><span>false</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail" hidden>Map
+                indexing returns a nullable value when the key may be absent.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>4. Which syntax unpacks elements into another List?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz3" value="0"
+                    data-right="true"><span>...source</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz3" value="1"
+                    data-right="false"><span>..sort()</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz3" value="2"
+                    data-right="false"><span>?.length</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Spread (...) inserts the source collection elements.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>5. What does the cascade expression return?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz4" value="0" data-right="true"><span>The
+                    original target object</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz4" value="1" data-right="false"><span>The
+                    last method return value</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz4" value="2"
+                    data-right="false"><span>Always an int</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>Cascades retain the original target object.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>6. What makes a named parameter mandatory?</legend>
+              <div class="quiz-options">
+                <label class="quiz-choice"><input type="radio" name="exitQuiz5" value="0"
+                    data-right="true"><span>required</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz5" value="1"
+                    data-right="false"><span>final</span></label>
+                <label class="quiz-choice"><input type="radio" name="exitQuiz5" value="2"
+                    data-right="false"><span>for</span></label>
+              </div>
+              <p class="quiz-feedback" aria-live="polite">Choose one option.</p><span class="answer-detail"
+                hidden>required forces the named argument to appear at the call site.</span>
+            </fieldset>
+          </form>
+          <div class="session03-book-note"><strong>Reference map:</strong> Flutter and Dart Fundamentals, Chapters 4 and
+            5 (Lists, functions,
+            and end-of-chapter practice); FLutter Cookbook, Chapter 3 (collections, collection control flow, cascade);
+            <a href="https://dart.dev/language/collections" target="_blank" rel="noopener noreferrer">Dart
+              Collections</a>, <a href="https://dart.dev/language/operators" target="_blank"
+              rel="noopener noreferrer">Dart Cascades</a>, <a href="https://dart.dev/language/functions" target="_blank"
+              rel="noopener noreferrer">Dart Functions</a>.
+          </div>
+        </section>
+        <footer class="footer-controls" aria-label="Lesson navigation">
+          <div class="footer-left"><span id="footerStep">Section 1 of 12</span><span class="footer-subtitle">120-minute
+              guided lab</span></div>
+          <div class="footer-actions"><button type="button" class="footer-btn ghost" id="previousButton">←
+              Previous</button><button type="button" class="footer-btn secondary" id="markButton">✓ Mark
+              completed</button><button type="button" class="footer-btn primary" id="nextButton">Next →</button></div>
+        </footer>
+      </main>
+      <footer class="small-note" style="padding:20px 40px;text-align:center;border-top:1px solid var(--line)">SICT235 ·
+        PDB2 · 2026–2027 · Guided blended learning</footer>
+    </div>
+  </div>
+</body>
+
+</html>
